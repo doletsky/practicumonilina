@@ -23,7 +23,7 @@ function convertHex(e, a) {
             e(this).css("background-image", "url('" + a + "')")
         }), e("*[data-parallax-bg-img]").each(function () {
             var a = e(this).data("parallax-bg-img");
-            e(this).css("background-image", "url('./Smiley_files/" + a + "')")
+            e(this).css("background-image", "url('./images/" + a + "')")
         })
     }
 

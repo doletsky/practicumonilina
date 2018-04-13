@@ -3213,7 +3213,7 @@ input[type=submit]:focus,input[type=submit].form-control:focus{box-shadow:none}
 #cta-title-1 .box-cta .shape-2{top:0;right:0}
 #cta-title-1 .box-cta .shape-3{bottom:0;left:0}
 #cta-title-1 .box-cta .shape-4{bottom:0;right:0}
-#footer-mini{background:#0d0d0d url("./footer-mini.jpg") top center/cover no-repeat;padding:330px 0 60px;text-align:center}
+#footer-mini{background:#0d0d0d url("../images/footer-mini.jpg") top center/cover no-repeat;padding:330px 0 60px;text-align:center}
 #footer-mini .logo-footer.logo-text h3{top:2px}
 #footer-mini .menu-footer{display:inline-block;float:right;overflow:hidden;list-style:none}
 #footer-mini .menu-footer.text-white li a{color:#fff}
