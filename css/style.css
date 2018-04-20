@@ -3157,7 +3157,7 @@ input[type=submit]:focus,input[type=submit].form-control:focus{box-shadow:none}
 .counter-stats .digit .counter-animator ul li{margin-top:0;padding-bottom:3px}
 #service-features .section-content{padding-top:200px}
 #watch-video .video-preview{height:470px}
-#clients-testmonials .section-content{background:#f9f9f9}
+#clients-testmonials .section-content, #clients-testmonials-plan .section-content{background:#f9f9f9}
 .testmonials-slider{width:100%}
 .testmonials-slider .owl-carousel{list-style:none}
 .testmonials-slider .owl-carousel .owl-stage-outer{margin-top:-3px;padding-top:3px}
