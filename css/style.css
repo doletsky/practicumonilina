@@ -3228,6 +3228,28 @@ input[type=submit]:focus,input[type=submit].form-control:focus{box-shadow:none}
 #footer-mini .copyrights-message{color:#000}
 #footer-mini .copyrights-message.text-white,#footer-mini .copyrights-message.text-white strong{color:#fff}
 #footer-mini .copyrights-message+.social-icons{margin-top:30px}
+
+/*add style for feedback block*/
+.feedback {
+    margin: 20px 0 100px;
+}
+.feedback input {
+    margin-bottom: 10px;
+}
+.feedback_title .white {
+    color: white;
+}
+.feedback_qwest{
+    height: 150px;
+    margin-bottom: 10px;
+}
+.feedback_button.btn{
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
 @media(max-width:1200px){#header{text-align:left}
     #header,#header #header-wrap{min-height:80px;height:auto}
     #header #header-wrap{overflow:hidden;position:fixed;top:0;left:0;right:0;z-index:10}
