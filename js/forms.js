@@ -9,6 +9,7 @@ jQuery(function($) {
                 url: '/ajax/signup.php',
                 data: 'EMAIL='+$('form.signup-form').find('[name="EMAIL"]').val(),
                 success: function (p) {
+                    console.log(p);
                     open_saccess_popup();
                 }
             });
