@@ -12,7 +12,11 @@ jQuery(function($) {
                 url: '/ajax/auth.php',
                 data: data,
                 success: function (p) {
-                    console.log(p);
+                    var an=JSON.parse(p);console.log(an);
+                    if(an.success=='true'){
+                        $('.mfp-bg').addClass('hidden');
+
+                    };
                 }
             });
 
