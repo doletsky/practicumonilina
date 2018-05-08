@@ -23,12 +23,19 @@
 <div  class="mfp-bg">
     <div class="mfp-container">
         <div class="mfp-content">
-            <div class="mfp-title">Title</div>
-            <div class="mfp-close">x</div>
-            <div>Форма авторизации или регистрации</div>
+            <div>
+                <form id="login_form">
+                    <input type="text" name="login" placeholder="Логин" required="required"><br><br>
+                    <input type="password" name="pass" placeholder="Пароль" required="required"><br><br>
+                    <input type="button" name="send" value="Авторизоваться" id="btn_form">
+                </form>
+
+            </div>
         </div>
 
     </div>
 </div>
+<script type="text/javascript" src="../js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="../js/lk.js"></script>
 </body>
 </html>
