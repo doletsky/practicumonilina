@@ -10,6 +10,7 @@ function BXCRMwebhook($command, $data = array()){
     return $result;
 }
 $arData=array(
+    'CODE' => '808gmadqp2pwcyb2',
     'CHAT_ID' => 22, // Идентификатор чата получателя, если сообщение для чата
     'MESSAGE' => 'Текст сообщения' // Тест сообщения
 );
