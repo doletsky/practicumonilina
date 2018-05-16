@@ -1,0 +1,10 @@
+# robots.txt for http://www.zametkina.ru
+User-Agent: *
+Disallow: /bitrix/
+Disallow: /css/
+Disallow: /upload/
+Disallow: /js/
+Disallow: /images/
+Disallow: /highslide/
+Disallow: /auth/
+Disallow: /tests/

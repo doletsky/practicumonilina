@@ -69,32 +69,45 @@ if((int)$arResult["total"]>0){
     if (array_key_exists('error', $addLeadResult)) echo "Ошибка при сохранении лида: " . $result['error_description'] . "
 
 	 ";
-    else {//оповещение по почте
+    else {//регистрация нового лида в системе
+        require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
+        //проверяем, есть ли такой пользователь в системе
+        global $USER;
+        $filter = Array("EMAIL" => $_REQUEST['EMAIL']);
+        $rsUsers = CUser::GetList(($by = "NAME"), ($order = "desc"), $filter);
+        if($arUser = $rsUsers->Fetch()) {
+            //есть такой, проверяем группы
+        }else{
+            //одаем лида
+        }
+
+
+        //оповещение по почте
         /* получатель */
-//        $to= $_REQUEST['EMAIL'];
-//
-//        /* тема/subject */
-//        $subject = "Вы записались на обучающий курс 'Как заказать сайт.'";
-//
-//        /* сообщение */
-//        $message = '
-//<html>
-//<head>
-// <title>Birthday Reminders for August</title>
-//</head>
-//<body>
-//Здравствуйте!<br>
-//Вы записались на обучающий курс "Как заказать сайт.".
-//</body>
-//</html>
-//';
-//
-//        /* Для отправки HTML-почты вы можете установить шапку Content-type. */
-//        $headers= "MIME-Version: 1.0\r\n";
-//        $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
-//
-//        /* дополнительные шапки */
-//        $headers .= "From: PRACTICUMonline <info@practicumonline.ru>\r\n";
+        $to= $_REQUEST['EMAIL'];
+
+        /* тема/subject */
+        $subject = "Вы записались на обучающий курс 'Как заказать сайт.'";
+
+        /* сообщение */
+        $message = '
+<html>
+<head>
+ <title>Birthday Reminders for August</title>
+</head>
+<body>
+Здравствуйте!<br>
+Вы записались на обучающий курс "Как заказать сайт.".
+</body>
+</html>
+';
+
+        /* Для отправки HTML-почты вы можете установить шапку Content-type. */
+        $headers= "MIME-Version: 1.0\r\n";
+        $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
+
+        /* дополнительные шапки */
+        $headers .= "From: PRACTICUMonline <info@practicumonline.ru>\r\n";
 
         /* и теперь отправим из */
 //        mail($to, $subject, $message, $headers);
