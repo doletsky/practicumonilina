@@ -78,7 +78,23 @@ if((int)$arResult["total"]>0){
         if($arUser = $rsUsers->Fetch()) {
             //есть такой, проверяем группы
         }else{
-            //одаем лида
+            //создаем лида
+            $user = new CUser;
+            $arFields = Array(
+                "EMAIL"             => $_REQUEST['EMAIL'],
+                "LOGIN"             => $_REQUEST['EMAIL'],
+                "LID"               => "ru",
+                "ACTIVE"            => "Y",
+                //"GROUP_ID"          => array(10,11),
+                "PASSWORD"          => "!Aa123456",
+                "CONFIRM_PASSWORD"  => "!Aa123456"
+            );
+
+            $ID = $user->Add($arFields);
+            if (intval($ID) > 0)
+                echo "Пользователь успешно добавлен.";
+            else
+                echo $user->LAST_ERROR;
         }
 
 
