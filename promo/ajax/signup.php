@@ -1,82 +1,30 @@
 <?php
-
-function writeToLog($data, $title = '')
-{
-    $log = "\n------------------------\n";
-    $log .= date("Y.m.d G:i:s") . "\n";
-    $log .= (strlen($title) > 0 ? $title : 'DEBUG') . "\n";
-    $log .= print_r($data, 1);
-    $log .= "\n------------------------\n";
-    file_put_contents(getcwd() . '/hook.log', $log, FILE_APPEND);
-    return true;
-}
-
-function BXCRMwebhook($command, $data = array()){
-    $queryUrl = 'https://practicumonline.bitrix24.ru/rest/1/808gmadqp2pwcyb2/'.$command.'.json';
-    $queryData = http_build_query($data);
-    $curl = curl_init();
-    curl_setopt_array($curl, array(CURLOPT_SSL_VERIFYPEER => 0, CURLOPT_POST => 1, CURLOPT_HEADER => 0, CURLOPT_RETURNTRANSFER => 1, CURLOPT_URL => $queryUrl, CURLOPT_POSTFIELDS => $queryData,));
-    $result = curl_exec($curl);
-    curl_close($curl);
-    $result = json_decode($result, 1);
-    return $result;
-}
-
-//проверить лиды на совпадение почты
-$command='crm.lead.list';
-$arData=array(
-        "filter"=> array("EMAIL"=>$_REQUEST['EMAIL']),
-        "select" => "*"
-);
-$arResult=BXCRMwebhook($command, $arData);
-
-if((int)$arResult["total"]>0){
-    // в существующие лиды добавить коммент о повторной подписке
-    $command='crm.lead.update';
-    $arData=array(
-            'id' => $arResult['result'][0]["ID"],
-            'fields' => array(
-            'COMMENTS' => $arResult['result'][0]["COMMENTS"]."<br>Повтор подписки: ".date('d.m.Y H:i:s')
-        ),
-        'params' => array("REGISTER_SONET_EVENT" => "Y")
-    );
-    $arResult=BXCRMwebhook($command, $arData);
-    //оповещение по почте
-
-
-}else{
-    //содаем новый лид
-    $command='crm.lead.add';
-    $arData=array(
-            'fields' => array(
-                "TITLE" => 'Подписка на курс',
-                "NAME" => "",
-                "LAST_NAME" => "",
-                "STATUS_ID" => "NEW",
-                "OPENED" => "Y",
-                "SOURCE_ID" => "WEB",
-                "ASSIGNED_BY_ID" => 1,
-                "EMAIL" => array(
-                    array(
-                        "VALUE" => $_REQUEST['EMAIL'],
-                        "VALUE_TYPE" => "WORK"
-                    )
-                ),
-            ),
-            'params' => array("REGISTER_SONET_EVENT" => "Y")
-        );
-    $addLeadResult=BXCRMwebhook($command, $arData);
-    if (array_key_exists('error', $addLeadResult)) echo "Ошибка при сохранении лида: " . $result['error_description'] . "
-
-	 ";
-    else {//регистрация нового лида в системе
+//регистрация лида в системе
         require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
+        //получаем группу лида и курса
+        //получаем id группы ЛИДЫ, Студенты и КУРС
+        $rsLids = CGroup::GetList ($by = "c_sort", $order = "asc", Array ("STRING_ID" => 'lids'));
+        $arLids=$rsLids->Fetch();
+        $rsStud = CGroup::GetList ($by = "c_sort", $order = "asc", Array ("STRING_ID" => 'students'));
+        $arStud=$rsStud->Fetch();
+        $rsCourse = CGroup::GetList ($by = "c_sort", $order = "asc", Array ("STRING_ID" => $_REQUEST['COURSE']));
+        $arCourse=$rsCourse->Fetch();
         //проверяем, есть ли такой пользователь в системе
         global $USER;
         $filter = Array("EMAIL" => $_REQUEST['EMAIL']);
         $rsUsers = CUser::GetList(($by = "NAME"), ($order = "desc"), $filter);
         if($arUser = $rsUsers->Fetch()) {
             //есть такой, проверяем группы
+            $arGroups = CUser::GetUserGroup($arUser["ID"]);
+            if(in_array($arStud["ID"],$arGroups)){
+                //уже обучается
+                if(in_array($arCourse["ID"],$arGroups)){
+                    //уже оплатил этот курс
+                    //письмо с уведомлением и ссылкой в ЛК,
+                    //промо предложением и ссылкой на восстановление пароля
+                }
+            }
+
         }else{
             //создаем лида
             $user = new CUser;
@@ -85,16 +33,23 @@ if((int)$arResult["total"]>0){
                 "LOGIN"             => $_REQUEST['EMAIL'],
                 "LID"               => "ru",
                 "ACTIVE"            => "Y",
-                //"GROUP_ID"          => array(10,11),
+                "GROUP_ID"          => array($arLids["ID"]),
                 "PASSWORD"          => "!Aa123456",
                 "CONFIRM_PASSWORD"  => "!Aa123456"
             );
 
             $ID = $user->Add($arFields);
             if (intval($ID) > 0)
+            {
                 echo "Пользователь успешно добавлен.";
+                //письмо с приглашением в личный кабинет
+                //промо предложением и предложением оплатить курс $arCourse["ID"]
+            }
             else
+            {
                 echo $user->LAST_ERROR;
+            }
+
         }
 
 
@@ -103,7 +58,7 @@ if((int)$arResult["total"]>0){
         $to= $_REQUEST['EMAIL'];
 
         /* тема/subject */
-        $subject = "Вы записались на обучающий курс 'Как заказать сайт.'";
+        $subject = "Вы записались на обучающий курс ".$arCourse["NAME"];
 
         /* сообщение */
         $message = '
@@ -128,10 +83,10 @@ if((int)$arResult["total"]>0){
         /* и теперь отправим из */
 //        mail($to, $subject, $message, $headers);
         echo "send email: ".mail($_REQUEST['EMAIL'], "My Subject", "Line 1\nLine 2\nLine 3");
-    } ;
 
 
-}
+
+
 //$defaults = array('first_name' => '', 'last_name' => '', 'phone' => '', 'email' => '');
 //    $defaults = $_REQUEST;
 //    writeToLog($_REQUEST, 'webform');

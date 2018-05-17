@@ -287,7 +287,7 @@ function convertHex(e, a) {
                     setTimeout(function () {
                         setTimeout(function () {
                             t.find(".counter-animator").each(function () {
-                                var a = e(this), t = 10 * a.data("value");console.log(t);
+                                var a = e(this), t = 10 * a.data("value");
                                 a.find("ul").css({
                                     transform: "translateY(-" + t + "%)",
                                     "-webkit-transform": "translateY(-" + t + "%)",

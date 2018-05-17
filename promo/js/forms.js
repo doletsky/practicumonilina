@@ -6,8 +6,8 @@ jQuery(function($) {
             if ($('form.signup-form').find('.signup_detect').val().length > 0) return false;
             $.ajax({
                 type: "POST",
-                url: '/ajax/signup.php',
-                data: 'EMAIL='+$('form.signup-form').find('[name="EMAIL"]').val(),
+                url: '/promo/ajax/signup.php',
+                data: 'EMAIL='+$('form.signup-form').find('[name="EMAIL"]').val()+'&COURSE='+$('form.signup-form').find('[name="COURSE"]').val(),
                 success: function (p) {
                     console.log(p);
                     open_saccess_popup();
