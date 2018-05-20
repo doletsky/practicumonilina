@@ -5,22 +5,17 @@
 <?
 ShowMessage($arParams["~AUTH_RESULT"]);
 ?>
-<form method="post" action="<?=$arResult["AUTH_FORM"]?>" name="bform">
+<form method="post" action="<?=$arResult["AUTH_FORM"]?>" name="bform" id="bform">
 	<?if (strlen($arResult["BACKURL"]) > 0): ?>
 	<input type="hidden" name="backurl" value="<?=$arResult["BACKURL"]?>" />
 	<? endif ?>
 	<input type="hidden" name="AUTH_FORM" value="Y">
 	<input type="hidden" name="TYPE" value="CHANGE_PWD">
 	<table class="data-table bx-changepass-table">
-		<thead>
-			<tr>
-				<td colspan="2"><b><?=GetMessage("AUTH_CHANGE_PASSWORD")?></b></td>
-			</tr>
-		</thead>
 		<tbody>
 			<tr>
 				<td><span class="starrequired">*</span><?=GetMessage("AUTH_LOGIN")?></td>
-				<td><input type="text" name="USER_LOGIN" maxlength="50" value="<?=$arResult["LAST_LOGIN"]?>" class="bx-auth-input" /></td>
+				<td><input type="text" name="USER_LOGIN" maxlength="50" value="" class="bx-auth-input" /></td>
 			</tr>
 			<tr>
 				<td><span class="starrequired">*</span><?=GetMessage("AUTH_CHECKWORD")?></td>
@@ -52,7 +47,7 @@ document.getElementById('bx_auth_secure').style.display = 'inline-block';
 		<tfoot>
 			<tr>
 				<td></td>
-				<td><input type="submit" name="change_pwd" value="<?=GetMessage("AUTH_CHANGE")?>" /></td>
+				<td><input class="feedback_button btn colorful" style="font-size: 15px" type="button" name="change_pwd" value="<?=GetMessage("AUTH_CHANGE")?>" onclick="$('#bform').submit();" /></td>
 			</tr>
 		</tfoot>
 	</table>
