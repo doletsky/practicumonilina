@@ -26,6 +26,9 @@
             }
 
         }else{
+            //готовим $checkword
+            $checkword = randString(8);
+            $salt = randString(8);
             //создаем лида
             $user = new CUser;
             $arFields = Array(
@@ -34,6 +37,7 @@
                 "LID"               => "ru",
                 "ACTIVE"            => "Y",
                 "GROUP_ID"          => array($arLids["ID"]),
+                "CHECKWORD"         => $salt.md5($salt.$checkword),
                 "PASSWORD"          => "!Aa123456",
                 "CONFIRM_PASSWORD"  => "!Aa123456"
             );
@@ -44,6 +48,7 @@
                 echo "Пользователь успешно добавлен.";
                 //письмо с приглашением в личный кабинет
                 //промо предложением и предложением оплатить курс $arCourse["ID"]
+                //ОТПРАВИТЬ В ПИСЬМЕ $checkword
             }
             else
             {
