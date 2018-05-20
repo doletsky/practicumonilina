@@ -2,11 +2,7 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Авторизация");
 ?>
-    <div class="section-content mfp-bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+
                     <?
                     if ($USER->IsAuthorized()) {
                         if ($USER->IsAdmin()) {
@@ -28,10 +24,6 @@ $APPLICATION->SetTitle("Авторизация");
                         );
                     }
                     ?>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 
