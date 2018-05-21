@@ -4,7 +4,7 @@ $APPLICATION->SetTitle("Смена пароля");
 
 $APPLICATION->IncludeComponent(
     "bitrix:system.auth.changepasswd",
-    ".default",
+    "practicum",
     Array(
         "SHOW_ERRORS" => "Y"
     )

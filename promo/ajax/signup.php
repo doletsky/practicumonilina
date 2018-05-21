@@ -1,40 +1,40 @@
 <?php
-//СЂРµРіРёСЃС‚СЂР°С†РёСЏ Р»РёРґР° РІ СЃРёСЃС‚РµРјРµ
+//регистрация лида в системе
         require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
-        //РїРѕР»СѓС‡Р°РµРј РіСЂСѓРїРїСѓ Р»РёРґР° Рё РєСѓСЂСЃР°
-        //РїРѕР»СѓС‡Р°РµРј id РіСЂСѓРїРїС‹ Р›РР”Р«, РЎС‚СѓРґРµРЅС‚С‹ Рё РљРЈР РЎ
+        //получаем группу лида и курса
+        //получаем id группы ЛИДЫ, Студенты и КУРС
         $rsLids = CGroup::GetList ($by = "c_sort", $order = "asc", Array ("STRING_ID" => 'lids'));
         $arLids=$rsLids->Fetch();
         $rsStud = CGroup::GetList ($by = "c_sort", $order = "asc", Array ("STRING_ID" => 'students'));
         $arStud=$rsStud->Fetch();
         $rsCourse = CGroup::GetList ($by = "c_sort", $order = "asc", Array ("STRING_ID" => $_REQUEST['COURSE']));
         $arCourse=$rsCourse->Fetch();
-        //РїСЂРѕРІРµСЂСЏРµРј, РµСЃС‚СЊ Р»Рё С‚Р°РєРѕР№ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РІ СЃРёСЃС‚РµРјРµ
+        //проверяем, есть ли такой пользователь в системе
         global $USER;
         $filter = Array("EMAIL" => $_REQUEST['EMAIL']);
         $rsUsers = CUser::GetList(($by = "NAME"), ($order = "desc"), $filter);
         if($arUser = $rsUsers->Fetch()) {
-            //РµСЃС‚СЊ С‚Р°РєРѕР№, РїСЂРѕРІРµСЂСЏРµРј РіСЂСѓРїРїС‹
+            //есть такой, проверяем группы
             $arGroups = CUser::GetUserGroup($arUser["ID"]);
             if(in_array($arStud["ID"],$arGroups)){
-                //СѓР¶Рµ РѕР±СѓС‡Р°РµС‚СЃСЏ
+                //уже обучается
                 if(in_array($arCourse["ID"],$arGroups)){
-                    //СѓР¶Рµ РѕРїР»Р°С‚РёР» СЌС‚РѕС‚ РєСѓСЂСЃ
-                    //РїРёСЃСЊРјРѕ СЃ СѓРІРµРґРѕРјР»РµРЅРёРµРј Рё СЃСЃС‹Р»РєРѕР№ РІ Р›Рљ,
-                    //РїСЂРѕРјРѕ РїСЂРµРґР»РѕР¶РµРЅРёРµРј Рё СЃСЃС‹Р»РєРѕР№ РЅР° РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ РїР°СЂРѕР»СЏ
+                    //уже оплатил этот курс
+                    //письмо с уведомлением и ссылкой в ЛК,
+                    //промо предложением и ссылкой на восстановление пароля
                 }
             }
 
         }else{
-            //РіРѕС‚РѕРІРёРј $checkword
-            $checkword = randString(8);
-            $salt = randString(8);
-            //СЃРѕР·РґР°РµРј Р»РёРґР°
+            //готовим $checkword
+            echo "<br>ch: "; echo $checkword = randString(8);
+            echo "<br>sl: "; echo$salt = randString(8);
+            //создаем лида
             $user = new CUser;
             $arFields = Array(
                 "EMAIL"             => $_REQUEST['EMAIL'],
                 "LOGIN"             => $_REQUEST['EMAIL'],
-                "LID"               => "ru",
+                "LID"               => "s1",
                 "ACTIVE"            => "Y",
                 "GROUP_ID"          => array($arLids["ID"]),
                 "CHECKWORD"         => $salt.md5($salt.$checkword),
@@ -42,13 +42,31 @@
                 "CONFIRM_PASSWORD"  => "!Aa123456"
             );
 
+            echo "<br>md: "; echo $arFields["CHECKWORD"];echo "<br>";
             $ID = $user->Add($arFields);
             if (intval($ID) > 0)
             {
-                echo "РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ СѓСЃРїРµС€РЅРѕ РґРѕР±Р°РІР»РµРЅ.";
-                //РїРёСЃСЊРјРѕ СЃ РїСЂРёРіР»Р°С€РµРЅРёРµРј РІ Р»РёС‡РЅС‹Р№ РєР°Р±РёРЅРµС‚
-                //РїСЂРѕРјРѕ РїСЂРµРґР»РѕР¶РµРЅРёРµРј Рё РїСЂРµРґР»РѕР¶РµРЅРёРµРј РѕРїР»Р°С‚РёС‚СЊ РєСѓСЂСЃ $arCourse["ID"]
-                //РћРўРџР РђР’РРўР¬ Р’ РџРРЎР¬РњР• $checkword
+                echo "Пользователь успешно добавлен.";
+                //добавим CHECKWORD
+                $strSql = "UPDATE b_user SET ".
+                    "	CHECKWORD = '".$salt.md5($salt.$checkword)."', ".
+                    "	CHECKWORD_TIME = ".$DB->CurrentTimeFunction().", ".
+                    "	LID = '".$DB->ForSql('s1', 2)."' ".
+                    "WHERE ID = '".$ID."'".
+                    "	AND (EXTERNAL_AUTH_ID IS NULL OR EXTERNAL_AUTH_ID='') ";
+
+                $DB->Query($strSql, false, "FILE: ".__FILE__."<br> LINE: ".__LINE__);
+                //письмо с приглашением в личный кабинет
+                //промо предложением и предложением оплатить курс $arCourse["ID"]
+                //ОТПРАВИТЬ В ПИСЬМЕ $checkword
+                $event = new CEvent;
+                $arPFields = Array(
+                    "COURSE_NAME" => $arCourse["NAME"],
+                    "USER_CHECKWORD" => $checkword,
+                    "USER_LOGIN"=>$_REQUEST['EMAIL'],
+                    "USER_EMAIL"=>$_REQUEST['EMAIL']
+                );
+                $event->Send("COURSE_SUBSCRIBE", "s1", $arPFields);
             }
             else
             {
@@ -58,79 +76,4 @@
         }
 
 
-        //РѕРїРѕРІРµС‰РµРЅРёРµ РїРѕ РїРѕС‡С‚Рµ
-        /* РїРѕР»СѓС‡Р°С‚РµР»СЊ */
-        $to= $_REQUEST['EMAIL'];
-
-        /* С‚РµРјР°/subject */
-        $subject = "Р’С‹ Р·Р°РїРёСЃР°Р»РёСЃСЊ РЅР° РѕР±СѓС‡Р°СЋС‰РёР№ РєСѓСЂСЃ ".$arCourse["NAME"];
-
-        /* СЃРѕРѕР±С‰РµРЅРёРµ */
-        $message = '
-<html>
-<head>
- <title>Birthday Reminders for August</title>
-</head>
-<body>
-Р—РґСЂР°РІСЃС‚РІСѓР№С‚Рµ!<br>
-Р’С‹ Р·Р°РїРёСЃР°Р»РёСЃСЊ РЅР° РѕР±СѓС‡Р°СЋС‰РёР№ РєСѓСЂСЃ "РљР°Рє Р·Р°РєР°Р·Р°С‚СЊ СЃР°Р№С‚.".
-</body>
-</html>
-';
-
-        /* Р”Р»СЏ РѕС‚РїСЂР°РІРєРё HTML-РїРѕС‡С‚С‹ РІС‹ РјРѕР¶РµС‚Рµ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ С€Р°РїРєСѓ Content-type. */
-        $headers= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
-
-        /* РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ С€Р°РїРєРё */
-        $headers .= "From: PRACTICUMonline <info@practicumonline.ru>\r\n";
-
-        /* Рё С‚РµРїРµСЂСЊ РѕС‚РїСЂР°РІРёРј РёР· */
-//        mail($to, $subject, $message, $headers);
-        echo "send email: ".mail($_REQUEST['EMAIL'], "My Subject", "Line 1\nLine 2\nLine 3");
-
-
-
-
-//$defaults = array('first_name' => '', 'last_name' => '', 'phone' => '', 'email' => '');
-//    $defaults = $_REQUEST;
-//    writeToLog($_REQUEST, 'webform');
-//    $queryUrl = 'https://practicumonline.bitrix24.ru/rest/1/808gmadqp2pwcyb2/crm.lead.add.json';
-//    $queryData = http_build_query(
-//        array(
-//            'fields' => array(
-//                "TITLE" => '',
-//                "NAME" => "",
-//                "LAST_NAME" => "",
-//                "STATUS_ID" => "NEW",
-//                "OPENED" => "Y",
-//                "SOURCE_ID" => "WEB",
-//                "ASSIGNED_BY_ID" => 1,
-//                "EMAIL" => array(
-//                    array(
-//                        "VALUE" => $_REQUEST['EMAIL'],
-//                        "VALUE_TYPE" => "WORK"
-//                    )
-//                ),
-//            ),
-//            'params' => array("REGISTER_SONET_EVENT" => "Y")
-//        )
-//    );
-//    $queryUrl = 'https://practicumonline.bitrix24.ru/rest/1/808gmadqp2pwcyb2/crm.lead.userfield.add.json';
-//    $queryData = http_build_query(
-//        array(
-//            'fields' => array(
-//                "FIELD_NAME" =>  'PROMOCODE',
-//                "EDIT_FORM_LABEL" => "РџСЂРѕРјРѕРєРѕРґ",
-//                "LIST_COLUMN_LABEL" => "РџСЂРѕРјРѕРєРѕРґ",
-//                "USER_TYPE_ID" => "string",
-//                "XML_ID" => "PROMOCODE"
-//            )
-//        )
-//    );
-
-//    writeToLog($result, 'webform result');
-//    if (array_key_exists('error', $result)) echo "РћС€РёР±РєР° РїСЂРё СЃРѕС…СЂР°РЅРµРЅРёРё Р»РёРґР°: " . $result['error_description'] . "
-//
-//	 ";
 ?><pre><?print_r($arResult)?></pre>

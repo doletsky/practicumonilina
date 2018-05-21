@@ -3,7 +3,9 @@
 <div class="bx-auth">
 
 <?
-ShowMessage($arParams["~AUTH_RESULT"]);
+if(key_exists("MESS",$arResult)){
+    echo "<pre>".print_r($arResult["MESS"])."</pre>";
+}
 ?>
 <form method="post" action="<?=$arResult["AUTH_FORM"]?>" name="bform" id="bform">
 	<?if (strlen($arResult["BACKURL"]) > 0): ?>
@@ -55,7 +57,7 @@ document.getElementById('bx_auth_secure').style.display = 'inline-block';
 <p><?echo $arResult["GROUP_POLICY"]["PASSWORD_REQUIREMENTS"];?></p>
 <p><span class="starrequired">*</span><?=GetMessage("AUTH_REQ")?></p>
 <p>
-<a href="<?=$arResult["AUTH_AUTH_URL"]?>"><b><?=GetMessage("AUTH_AUTH")?></b></a>
+<a href="/"><b><?=GetMessage("AUTH_AUTH")?></b></a>
 </p>
 
 </form>

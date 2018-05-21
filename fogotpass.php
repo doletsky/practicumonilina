@@ -4,7 +4,7 @@ $APPLICATION->SetTitle("Восстановление пароля");
 
 $APPLICATION->IncludeComponent(
     "bitrix:system.auth.forgotpasswd",
-    ".default",
+    "practicum",
     Array(
         "COMPONENT_TEMPLATE" => ".default"
     )
