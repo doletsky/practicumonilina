@@ -1,6 +1,7 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
-
-
+<?if($arResult["SHOW_ERRORS"]=="Y"):?>
+<pre><?print_r($arResult["ERROR_MESSAGE"]["MESSAGE"])?></pre>
+<?endif?>
 
                         <form id="login_form" name="system_auth_form<?=$arResult["RND"]?>" method="post" target="_top" action="<?=$arResult["AUTH_URL"]?>">
                             <input type="hidden" name="AUTH_FORM" value="Y" />

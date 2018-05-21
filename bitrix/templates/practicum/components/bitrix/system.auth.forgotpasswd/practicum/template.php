@@ -14,7 +14,11 @@ if (strlen($arResult["BACKURL"]) > 0)
 	<input type="hidden" name="AUTH_FORM" value="Y">
 	<input type="hidden" name="TYPE" value="SEND_PWD">
 	<p>
-	<?=GetMessage("AUTH_FORGOT_PASSWORD_1")?>
+	<?if($_REQUEST["forgot_password"]=="yes") {
+        echo $arResult["MESS_FORGOT"]; print_r($_REQUEST);
+    }else {
+	    GetMessage("AUTH_FORGOT_PASSWORD_1");
+        }?>
 	</p>
 
 <table class="data-table bx-forgotpass-table">
