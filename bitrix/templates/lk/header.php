@@ -18,13 +18,17 @@ if ($USER->IsAdmin())$APPLICATION->ShowPanel();
 <div class="section-content mfp-bg">
     <div class="container">
         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <a class="logo-header">
                     <span class="pull-right">ONLINE</span>
                     <h4><span class="colored">PRACTICUM</span></h4>
+                    <div class="clearfix"></div>
+                    <hr>
                 </a>
-                <div class="clearfix"></div>
-                <hr>
-                <div>
-                    <h2><span class="colored"><?$APPLICATION->ShowTitle()?></span></h2>
+            </div>
+            <div class="col-md-2">
+                <h2><span class="colored"><?$APPLICATION->ShowTitle()?></span></h2>
+            </div>
+            <div class="col-lg-6">menu</div>
+        </div>
+
