@@ -3,9 +3,10 @@
 <div class="bx-auth">
 
 <?
-if(key_exists("MESS",$arResult)){
-    echo "<pre>".print_r($arResult["MESS"])."</pre>";
-}
+
+$arARes = $APPLICATION->arAuthResult;
+if(key_exists("MESSAGE", $arARes))
+    echo "<p>".$arARes["MESSAGE"]."</p>";
 ?>
 <form method="post" action="<?=$arResult["AUTH_FORM"]?>" name="bform" id="bform">
 	<?if (strlen($arResult["BACKURL"]) > 0): ?>

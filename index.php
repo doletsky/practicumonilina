@@ -16,7 +16,7 @@ $APPLICATION->SetTitle("Авторизация");
                             "",
                             Array(
                                 "REGISTER_URL" => "",
-                                "FORGOT_PASSWORD_URL" => "/fogotpass.php",
+                                "FORGOT_PASSWORD_URL" => "/forgotpass.php",
                                 "PROFILE_URL" => "",
                                 "SHOW_ERRORS" => "Y"
                             ),
