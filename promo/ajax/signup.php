@@ -67,6 +67,85 @@
                     "USER_EMAIL"=>$_REQUEST['EMAIL']
                 );
                 $event->Send("COURSE_SUBSCRIBE", "s1", $arPFields);
+                //создаем служебные элементы и разделы ИБ
+                //1.Тему форума для чата
+                CModule::IncludeModule("forum");
+                $topic_id=CForumTopic::Add(
+                    array(
+                        'TITLE' => $_REQUEST['EMAIL'],
+                        'USER_START_NAME' => $_REQUEST['EMAIL'],
+                        "LAST_POSTER_NAME" => 'Администратор',
+                        'FORUM_ID' => FORUM_CHAT_ID
+                    )
+                );
+                //1.2 Приветственное сообщение
+                $arMFields = Array(
+                    "POST_MESSAGE" => "Здравствуйте! Здесь вы можете задавать любые вопросы.",
+                    "USE_SMILES" =>  "N",
+                    "APPROVED" => "Y",
+                    "AUTHOR_NAME" => "Администратор",
+                    "AUTHOR_ID" => 1,
+                    "FORUM_ID" => FORUM_CHAT_ID,
+                    "TOPIC_ID" => $topic_id,
+                    "NEW_TOPIC" => "Y"
+                );
+                $mess_id = CForumMessage::Add($arMFields);
+                //2 Раздел статистики
+                CModule::IncludeModule("iblock");
+                $bs = new CIBlockSection;
+                $arSFields = Array(
+                    "ACTIVE" => "Y",
+                    "IBLOCK_ID" => STAT_IBLOCK_ID,
+                    "NAME" => $_REQUEST['EMAIL'],
+                );
+                    $statSecId = $bs->Add($arSFields);
+                //3 Раздел расчетов
+                $bc = new CIBlockSection;
+                $arCFields = Array(
+                    "ACTIVE" => "Y",
+                    "IBLOCK_ID" => CALC_IBLOCK_ID,
+                    "NAME" => $_REQUEST['EMAIL'],
+                );
+                $calcSecId = $bc->Add($arCFields);
+                //4 Раздел документов
+                $bd = new CIBlockSection;
+                $arDFields = Array(
+                    "ACTIVE" => "Y",
+                    "IBLOCK_ID" => DOCS_IBLOCK_ID,
+                    "NAME" => $_REQUEST['EMAIL'],
+                );
+                $docsSecId = $bd->Add($arDFields);
+                //5. Получим ID курса
+                $arFilter = Array(
+                    "IBLOCK_ID"=>COURSE_IBLOCK_ID,
+                    "ACTIVE"=>"Y",
+                    "CODE"=>$_REQUEST["COURSE"]
+                );
+                $res = CIBlockElement::GetList(Array("SORT"=>"ASC"), $arFilter);
+                $ar_fields = $res->GetNext();
+                $course_id = $ar_fields["ID"];
+
+                //6. Главный елемент Лида
+                $el = new CIBlockElement;
+
+                $PROP = array(
+                    "142"=> $ID,
+                    "143"=>$topic_id,
+                    "144"=>$statSecId,
+                    "145"=>$course_id,
+                    "147"=>$calcSecId,
+                    "148"=>$docsSecId
+                );
+
+                $arLoadProductArray = Array(
+                    "IBLOCK_SECTION_ID" => false,          // элемент лежит в корне раздела
+                    "IBLOCK_ID"      => MAIN_IBLOCK_ID,
+                    "PROPERTY_VALUES"=> $PROP,
+                    "NAME"           => $_REQUEST['EMAIL'],
+                    "ACTIVE"         => "Y"            // активен
+                );
+
+                $PRODUCT_ID = $el->Add($arLoadProductArray);
             }
             else
             {
