@@ -39,9 +39,6 @@ if ($USER->IsAdmin() && $_GET["panel"]==1)$APPLICATION->ShowPanel();
                     <hr>
                 </a>
             </div>
-            <div class="col-md-2">
-                <h2><span class="colored"><?$APPLICATION->ShowTitle()?></span></h2>
-            </div>
-            <div class="col-lg-6">menu</div>
+            <div class="col-lg-8">menu</div>
         </div>
 

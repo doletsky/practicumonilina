@@ -23,11 +23,12 @@ $APPLICATION->SetTitle("Title");
 
     </div>
     <div class="col-lg-5">
+            <h4><span class="colored"><?$APPLICATION->ShowTitle()?></span></h4>
         Это рабочее поля занятия.<br>
         Здесь будет весь рабочий материал: видео, текст, тесты и поле выполнения д/з.
     </div>
     <div class="col-md-4" style="overflow-y: scroll;height: 310px;position: relative;">
-        <?$APPLICATION->IncludeComponent("bitrix:forum.topic.reviews","",Array(
+        <?$APPLICATION->IncludeComponent("bitrix:forum.topic.reviews","chat",Array(
                 "SHOW_LINK_TO_FORUM" => "N",
                 "FILES_COUNT" => "2",
                 "FORUM_ID" => "8",
