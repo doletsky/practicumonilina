@@ -1,3 +1,4 @@
 $(document).ready(function () {
-    //$('.lk-students-chat .chat').jScrollPane();
+    $('.lk-students-chat .chat').jScrollPane();
+
 });

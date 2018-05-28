@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/xml; charset=windows-1251" />
 <link href="/promo/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/promo/css/style_lk.css" rel="stylesheet" type="text/css" />
+    <link href="/promo/css/jquery.jscrollpane.css" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript" src="/promo/js/jquery-2.2.3.min.js"></script>
     <script type="text/javascript" src="/promo/js/jquery.mousewheel.min.js"></script>
