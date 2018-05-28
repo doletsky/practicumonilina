@@ -6,7 +6,13 @@
 <title><?$APPLICATION->ShowTitle()?></title>
 <meta http-equiv="Content-Type" content="text/xml; charset=windows-1251" />
 <link href="/promo/css/style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="/promo/js/jquery-2.2.3.min.js"></script>
+<link href="/promo/css/style_lk.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="/promo/js/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="/promo/js/jquery.mousewheel.min.js"></script>
+    <script type="text/javascript" src="/promo/js/jquery.jscrollpane.min.js"></script>
+    <script type="text/javascript" src="/promo/js/lk.js"></script>
+
 <?$APPLICATION->ShowHead();?>
 <?if(!isset($_SESSION["PR"]["topic_id"]) || !isset($_SESSION["PR"]["main_id"])){
     CModule::IncludeModule("iblock");
@@ -29,7 +35,7 @@
 if ($USER->IsAdmin() && $_GET["panel"]==1)$APPLICATION->ShowPanel();
 ?>
 <div class="section-content mfp-wrap">
-    <div class="container">
+    <div class="container lk-students">
         <div class="row">
             <div class="col-md-3">
                 <a class="logo-header">
