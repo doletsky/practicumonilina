@@ -8,26 +8,30 @@ $ar=array(
 );
 if($_REQUEST["count"]!=$arTopic["POSTS"]+1){
     //добавились сообщения
-    $messHtml='';
+    $arMess=array();
     $db_res = CForumMessage::GetList(array("POST_DATE"=>"ASC"), array("TOPIC_ID"=>$_REQUEST["tid"]));
     while ($res = $db_res->Fetch())
     {
-        $messHtml.='<div class="chat-message col-md-12">';
-        $messHtml.='<div class="reviews-text ';
+        $me='';
+        $author='Куратор ';
         if($USER->GetID()==$res["AUTHOR_ID"]){
-            $messHtml.='chat-message-me';
+            $me='chat-message-me';
         }
-        $messHtml.='" id="message_text_'.$res["ID"].'"><div class="chat-message-author col-md-12">';
-        if($USER->GetID()!=$res["AUTHOR_ID"]){
-            $messHtml.='Куратор ';
-        }else{
-            $messHtml.='Я ';
+        if($USER->GetID()==$res["AUTHOR_ID"]){
+            $author='Я ';
         }
-        $messHtml.='<span class="message-post-date">'.$res["POST_DATE"]."</span></div>".$res["POST_MESSAGE_TEXT"]."</div></div>";
+        $arMess[]=array(
+            "id"=>$res["ID"],
+            "data"=>$res["POST_DATE"],
+            "post"=>$res["POST_MESSAGE_TEXT"],
+            "me"=>$me,
+            "author"=>$author
+        );
+
     }
 }
 $ar=array(
     'new_mess'=>'1',
-    'html_mess'=>$messHtml
+    'html_mess'=>$arMess
 );
 echo json_encode( $ar );
