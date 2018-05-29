@@ -1,18 +1,33 @@
 <?php
-function BXCRMwebhook($command, $data = array()){
-    $queryUrl = 'https://practicumonline.bitrix24.ru/rest/1/808gmadqp2pwcyb2/imopenlines.network.message.add.json';
-    $queryData = http_build_query($data);
-    $curl = curl_init();
-    curl_setopt_array($curl, array(CURLOPT_SSL_VERIFYPEER => 0, CURLOPT_POST => 1, CURLOPT_HEADER => 0, CURLOPT_RETURNTRANSFER => 1, CURLOPT_URL => $queryUrl, CURLOPT_POSTFIELDS => $queryData,));
-    $result = curl_exec($curl);
-    curl_close($curl);
-    $result = json_decode($result, 1);
-    return $result;
-}
-$arData=array(
-    'CODE' => '9e9b79fa2f4a2f27abf5551eba2ee8fb',
-    'USER_ID' => 2, // Идентификатор чата получателя, если сообщение для чата
-    'MESSAGE' => 'Приветсвуем Вас у нас на курсах!' // Тест сообщения
+require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
+CModule::IncludeModule("forum");
+$arTopic = CForumTopic::GetByID($_REQUEST["tid"]);
+
+$ar=array(
+    'new_mess'=>'0'
 );
-$arResult=BXCRMwebhook($command, $arData);
-?><pre><?print_r($arResult)?></pre>
+if($_REQUEST["count"]!=$arTopic["POSTS"]+1){
+    //добавились сообщения
+    $messHtml='';
+    $db_res = CForumMessage::GetList(array("POST_DATE"=>"ASC"), array("TOPIC_ID"=>$_REQUEST["tid"]));
+    while ($res = $db_res->Fetch())
+    {
+        $messHtml.='<div class="chat-message col-md-12">';
+        $messHtml.='<div class="reviews-text ';
+        if($USER->GetID()==$res["AUTHOR_ID"]){
+            $messHtml.='chat-message-me';
+        }
+        $messHtml.='" id="message_text_'.$res["ID"].'"><div class="chat-message-author col-md-12">';
+        if($USER->GetID()!=$res["AUTHOR_ID"]){
+            $messHtml.='Куратор ';
+        }else{
+            $messHtml.='Я ';
+        }
+        $messHtml.='<span class="message-post-date">'.$res["POST_DATE"]."</span></div>".$res["POST_MESSAGE_TEXT"]."</div></div>";
+    }
+}
+$ar=array(
+    'new_mess'=>'1',
+    'html_mess'=>$messHtml
+);
+echo json_encode( $ar );

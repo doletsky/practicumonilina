@@ -1,7 +1,8 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
-?><div class="chat"><?
+//?><!--<pre>--><?//print_r($arResult)?><!--</pre>--><?//
+?><div class="chat" data-chatid="<?=$arResult["ELEMENT"]["PRODUCT_PROPS"]["FORUM_TOPIC_ID"]["VALUE"]?>" data-fid="<?=$arResult["FORUM"]["ID"]?>"><?
 if (!empty($arResult["MESSAGES"])):
-    ?><div class="row"><?
+    ?><div class="row" id="messages"><?
 foreach ($arResult["MESSAGES"] as $res):
 ?>
     <div class="chat-message col-md-12">
