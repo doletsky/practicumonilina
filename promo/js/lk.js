@@ -2,11 +2,16 @@ $(document).ready(function () {
     var el=$('.lk-students-chat .chat').jScrollPane();
     var api = el.data('jsp');
     api.scrollToBottom('slow');
-    //отслеживание ответов в online
+
     var countMess=0;
     var forumId=$('.lk-students-chat .chat').data('fid');
     var topicId=$('.lk-students-chat .chat').data('chatid');
-    var timerId = setInterval(function() {
+
+    // $('#REPLIER').submit(function (elem) {
+    //     defi
+    // });
+
+    function controlAddMess(tid) {
         countMess=$('.lk-students-chat').find('.chat-message').length;
         $.ajax({
             type: "POST",
@@ -38,20 +43,11 @@ $(document).ready(function () {
                 }
             }
         });
+    }
+
+    //отслеживание ответов в online
+    var timerId = setInterval(function() {
+        controlAddMess(topicId);
     }, 30000);
 });
 
-/*
-<div class="chat-message col-md-12">
- <div class="reviews-text <?if($USER->GetID()==$res["AUTHOR_ID"]):?> chat-message-me<?endif;?>" id="message_text_<?=$res["ID"]?>">
- <div class="chat-message-author col-md-12">
- <?if($USER->GetID()!=$res["AUTHOR_ID"]):?>
- Куратор
- <?else:?>
- Я
- <?endif?>
- <span class='message-post-date'><?=$res["POST_DATE"]?></span></div>
- <?=$res["POST_MESSAGE_TEXT"]?>
- </div>
- </div>
- */
