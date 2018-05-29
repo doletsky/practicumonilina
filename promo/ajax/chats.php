@@ -6,32 +6,33 @@ $arTopic = CForumTopic::GetByID($_REQUEST["tid"]);
 $ar=array(
     'new_mess'=>'0'
 );
+$log['cnt']=$arTopic["POSTS"]+1;
 if($_REQUEST["count"]!=$arTopic["POSTS"]+1){
-    //äîáàâèëèñü ñîîáùåíèÿ
+    //Ð´Ð¾Ð±Ð°Ð²Ð¸Ð»Ð¸ÑÑŒ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ñ
     $arMess=array();
     $db_res = CForumMessage::GetList(array("POST_DATE"=>"ASC"), array("TOPIC_ID"=>$_REQUEST["tid"]));
     while ($res = $db_res->Fetch())
     {
         $me='';
-        $author='Êóðàòîð ';
+        $author='ÐšÑƒÑ€Ð°Ñ‚Ð¾Ñ€ ';
         if($USER->GetID()==$res["AUTHOR_ID"]){
             $me='chat-message-me';
-        }
-        if($USER->GetID()==$res["AUTHOR_ID"]){
-            $author='ß ';
+            $author='Ð¯ ';
         }
         $arMess[]=array(
             "id"=>$res["ID"],
             "data"=>$res["POST_DATE"],
-            "post"=>$res["POST_MESSAGE_TEXT"],
+            "post"=>mb_convert_encoding($res["POST_MESSAGE"], "utf-8", "windows-1251"),
             "me"=>$me,
             "author"=>$author
         );
 
     }
+    $ar=array(
+        'log'=>$log,
+        'new_mess'=>'1',
+        'html_mess'=>$arMess
+    );
 }
-$ar=array(
-    'new_mess'=>'1',
-    'html_mess'=>$arMess
-);
+
 echo json_encode( $ar );

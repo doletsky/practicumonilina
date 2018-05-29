@@ -42,7 +42,7 @@ $APPLICATION->SetTitle("Title");
                     "URL_TEMPLATES_READ" => "read.php?FID=#FID#&TID=#TID#",
                     "URL_TEMPLATES_DETAIL" => "photo_detail.php?ID=#ELEMENT_ID#",
                     "URL_TEMPLATES_PROFILE_VIEW" => "profile_view.php?UID=#UID#",
-                    "MESSAGES_PER_PAGE" => "10",
+                    "MESSAGES_PER_PAGE" => "1000000",
                     "PAGE_NAVIGATION_TEMPLATE" => "",
                     "DATE_TIME_FORMAT" => "d.m.Y H:i:s",
                     "PATH_TO_SMILE" => "/bitrix/images/forum/smile/",
