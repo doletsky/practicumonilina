@@ -57,7 +57,7 @@ $(document).ready(function () {
                         $('.lk-students-chat').find('#messages').append(mh);
                         mh='';
                     }
-
+                    $('.chat-message').css('opacity','1');
                     setTimeout(function () {
                         el=$('.lk-students-chat .chat').jScrollPane({autoReinitialise: true});
                         api = el.data('jsp');
