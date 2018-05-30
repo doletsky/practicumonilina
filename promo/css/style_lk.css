@@ -47,6 +47,9 @@ body {
     height: 100%;
     position: relative;
 }
+.chat-message {
+    opacity: 0;
+}
 .chat-message .reviews-text {
     width:80%;
     padding: 15px 10px;

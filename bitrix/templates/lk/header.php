@@ -15,20 +15,20 @@
     <script type="text/javascript" src="/promo/js/lk.js"></script>
 
 <?$APPLICATION->ShowHead();?>
-<?if(!isset($_SESSION["PR"]["topic_id"]) || !isset($_SESSION["PR"]["main_id"])){
-    CModule::IncludeModule("iblock");
-    $arFilter = Array(
-        "IBLOCK_ID"=>MAIN_IBLOCK_ID,
-        "ACTIVE"=>"Y",
-        "PROPERTY_USER"=>$USER->GetID()
-    );
-    $res = CIBlockElement::GetList(Array("SORT"=>"ASC"), $arFilter, false, false, Array("ID","IBLOCK_ID","PROPERTY_FORUM_TOPIC_ID"));
-    if($ar_fields = $res->GetNext()){
-        $_SESSION["PR"]["topic_id"]=$ar_fields["PROPERTY_FORUM_TOPIC_ID_VALUE"];
-        $_SESSION["PR"]["main_id"]=$ar_fields["ID"];
-    }
-
-}?>
+<?//if(!isset($_SESSION["PR"]["topic_id"]) || !isset($_SESSION["PR"]["main_id"])){
+//    CModule::IncludeModule("iblock");
+//    $arFilter = Array(
+//        "IBLOCK_ID"=>MAIN_IBLOCK_ID,
+//        "ACTIVE"=>"Y",
+//        "PROPERTY_USER"=>$USER->GetID()
+//    );
+//    $res = CIBlockElement::GetList(Array("SORT"=>"ASC"), $arFilter, false, false, Array("ID","IBLOCK_ID","PROPERTY_FORUM_TOPIC_ID"));
+//    if($ar_fields = $res->GetNext()){
+//        $_SESSION["PR"]["topic_id"]=$ar_fields["PROPERTY_FORUM_TOPIC_ID_VALUE"];
+//        $_SESSION["PR"]["main_id"]=$ar_fields["ID"];
+//    }
+//
+//}?>
 </head>
 
 <body>

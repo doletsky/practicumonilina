@@ -1,15 +1,38 @@
 $(document).ready(function () {
+
     var el=$('.lk-students-chat .chat').jScrollPane();
     var api = el.data('jsp');
-    api.scrollToBottom('slow');
+    api.scrollToBottom('fast');
+    setTimeout(function () {
+        $('.chat-message').css('opacity','1');
+    },500);
+
 
     var countMess=0;
     var forumId=$('.lk-students-chat .chat').data('fid');
     var topicId=$('.lk-students-chat .chat').data('chatid');
 
-    // $('#REPLIER').submit(function (elem) {
-    //     defi
-    // });
+    $('#REPLIER').submit(function (elem) {
+       elem.preventDefault();
+       var param=''
+       $(this).children('input').each(function () {
+           param+=$(this).attr('name')+'='+$(this).val()+'&';
+       });
+       param+='REVIEW_TEXT='+$(this).children('textarea').val();
+       // console.log(param);
+        $.ajax({
+            type: "POST",
+            url: "/promo/ajax/chat_save_message.php",
+            data: param,
+            success: function(){
+                setTimeout(function () {
+                    controlAddMess(topicId);
+                },500);
+                $('#REPLIER').children('textarea').val('');
+
+            }
+        });
+    });
 
     function controlAddMess(tid) {
         countMess=$('.lk-students-chat').find('.chat-message').length;

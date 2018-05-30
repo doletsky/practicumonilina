@@ -146,6 +146,7 @@
                 );
 
                 $PRODUCT_ID = $el->Add($arLoadProductArray);
+                COption::SetOptionInt("iblock", "main_eid_for_uid_".$ID, $PRODUCT_ID);
             }
             else
             {
