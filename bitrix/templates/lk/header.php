@@ -24,7 +24,7 @@ if ($USER->IsAdmin() && $_GET["panel"]==1)$APPLICATION->ShowPanel();
 <div class="section-content mfp-wrap">
     <div class="container lk-students">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <a class="logo-header">
                     <span class="pull-right">ONLINE</span>
                     <h4><span class="colored">PRACTICUM</span></h4>
@@ -32,10 +32,26 @@ if ($USER->IsAdmin() && $_GET["panel"]==1)$APPLICATION->ShowPanel();
                     <hr>
                 </a>
             </div>
-            <div class="col-lg-8">menu</div>
+            <div class="col-lg-9">
+                <?$APPLICATION->IncludeComponent(
+                    "bitrix:menu",
+                    "",
+                    Array(
+                        "ROOT_MENU_TYPE" => "top",
+                        "MAX_LEVEL" => "1",
+                        "USE_EXT" => "N",
+                        "DELAY" => "Y",
+                        "ALLOW_MULTI_SELECT" => "Y",
+                        "MENU_CACHE_TYPE" => "N",
+                        "MENU_CACHE_TIME" => "3600",
+                        "MENU_CACHE_USE_GROUPS" => "Y",
+                        "MENU_CACHE_GET_VARS" => array()
+                    )
+                );?>
+            </div>
         </div>
         <div class="row lk-students-body">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <h5>Список уроков</h5>
                 <div class="col-md-12">
                     <a href="#">
