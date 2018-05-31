@@ -15,20 +15,6 @@
     <script type="text/javascript" src="/promo/js/lk.js"></script>
 
 <?$APPLICATION->ShowHead();?>
-<?//if(!isset($_SESSION["PR"]["topic_id"]) || !isset($_SESSION["PR"]["main_id"])){
-//    CModule::IncludeModule("iblock");
-//    $arFilter = Array(
-//        "IBLOCK_ID"=>MAIN_IBLOCK_ID,
-//        "ACTIVE"=>"Y",
-//        "PROPERTY_USER"=>$USER->GetID()
-//    );
-//    $res = CIBlockElement::GetList(Array("SORT"=>"ASC"), $arFilter, false, false, Array("ID","IBLOCK_ID","PROPERTY_FORUM_TOPIC_ID"));
-//    if($ar_fields = $res->GetNext()){
-//        $_SESSION["PR"]["topic_id"]=$ar_fields["PROPERTY_FORUM_TOPIC_ID_VALUE"];
-//        $_SESSION["PR"]["main_id"]=$ar_fields["ID"];
-//    }
-//
-//}?>
 </head>
 
 <body>
@@ -48,4 +34,24 @@ if ($USER->IsAdmin() && $_GET["panel"]==1)$APPLICATION->ShowPanel();
             </div>
             <div class="col-lg-8">menu</div>
         </div>
+        <div class="row lk-students-body">
+            <div class="col-md-3">
+                <h5>Список уроков</h5>
+                <div class="col-md-12">
+                    <a href="#">
+                        Урок 1. Введение.
+                    </a>
+                </div>
+                <div class="col-md-12">
+                    <a href="#">
+                        Урок 2. Тема.
+                    </a>
+                </div>
+                <div class="col-md-12">
+                    <a href="#">
+                        Урок 3. Тема.
+                    </a>
+                </div>
+
+            </div>
 
