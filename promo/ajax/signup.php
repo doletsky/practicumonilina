@@ -121,7 +121,7 @@
                     "ACTIVE"=>"Y",
                     "CODE"=>$_REQUEST["COURSE"]
                 );
-                $res = CIBlockElement::GetList(Array("SORT"=>"ASC"), $arFilter);
+                $res = CIBlockSection::GetList(Array("SORT"=>"ASC"), $arFilter);
                 $ar_fields = $res->GetNext();
                 $course_id = $ar_fields["ID"];
 
