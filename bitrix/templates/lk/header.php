@@ -10,6 +10,7 @@
     <link href="/promo/css/jquery.jscrollpane.css" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript" src="/promo/js/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="/promo/js/jquery.jplayer.min.js"></script>
     <script type="text/javascript" src="/promo/js/jquery.mousewheel.min.js"></script>
     <script type="text/javascript" src="/promo/js/jquery.jscrollpane.min.js"></script>
     <script type="text/javascript" src="/promo/js/lk.js"></script>
@@ -67,22 +68,6 @@ if ($USER->IsAdmin() && $_GET["panel"]==1)$APPLICATION->ShowPanel();
                         "MENU_CACHE_GET_VARS" => array()
                     )
                 );?>
-<!--                <h5>Список уроков</h5>-->
-<!--                <div class="col-md-12">-->
-<!--                    <a href="#">-->
-<!--                        Урок 1. Введение.-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--                <div class="col-md-12">-->
-<!--                    <a href="#">-->
-<!--                        Урок 2. Тема.-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--                <div class="col-md-12">-->
-<!--                    <a href="#">-->
-<!--                        Урок 3. Тема.-->
-<!--                    </a>-->
-<!--                </div>-->
 
             </div>
 
