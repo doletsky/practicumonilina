@@ -1,101 +1,23 @@
 <?
 $arUrlRewrite = array(
+    array(
+        "CONDITION"	=>	"#^/lk/course/([0-9a-zA-Z_-]+)/([0-9a-zA-Z_-]+)/.*#",
+        "RULE"	=>	"course=$1&id=$2",
+        "ID"	=>	"",
+        "PATH"	=>	"/lk/index.php",
+    ),
+    array(
+        "CONDITION"	=>	"#^/lk/course/([0-9a-zA-Z_-]+)/.*#",
+        "RULE"	=>	"course=$1",
+        "ID"	=>	"",
+        "PATH"	=>	"/lk/index.php",
+    ),
 	array(
-		"CONDITION"	=>	"#^/examples/my-components/news/#",
-		"RULE"	=>	"",
-		"ID"	=>	"demo:news",
-		"PATH"	=>	"/examples/my-components/news_sef.php",
-	),
-	array(
-		"CONDITION"	=>	"#^/company/([0-9a-zA-Z_-]+)/.*#",
-		"RULE"	=>	"ELEMENT_CODE=$1",
+		"CONDITION"	=>	"#^/lk/profile/([0-9a-zA-Z_-]+)/.*#",
+		"RULE"	=>	"tab=$1",
 		"ID"	=>	"",
-		"PATH"	=>	"/company/detail.php",
-	),
-	array(
-		"CONDITION"	=>	"#^/hramy/([0-9a-zA-Z_-]+)/.*#",
-		"RULE"	=>	"ELEMENT_CODE=$1",
-		"ID"	=>	"",
-		"PATH"	=>	"/hramy/detail.php",
-	),
-	array(
-		"CONDITION"	=>	"#^/e-store/books/reviews/#",
-		"RULE"	=>	"",
-		"ID"	=>	"bitrix:news",
-		"PATH"	=>	"/e-store/books/reviews/index.php",
-	),
-	array(
-		"CONDITION"	=>	"#^/e-store/xml_catalog/#",
-		"RULE"	=>	"",
-		"ID"	=>	"bitrix:catalog",
-		"PATH"	=>	"/e-store/xml_catalog/index.php",
-	),
-	array(
-		"CONDITION"	=>	"#^/communication/forum/#",
-		"RULE"	=>	"",
-		"ID"	=>	"bitrix:forum",
-		"PATH"	=>	"/communication/forum/index.php",
-	),
-	array(
-		"CONDITION"	=>	"#^/communication/blog/#",
-		"RULE"	=>	"",
-		"ID"	=>	"bitrix:blog",
-		"PATH"	=>	"/communication/blog/index.php",
-	),
-	array(
-		"CONDITION"	=>	"#^/content/articles/#",
-		"RULE"	=>	"",
-		"ID"	=>	"bitrix:news",
-		"PATH"	=>	"/content/articles/index.php",
-	),
-	array(
-		"CONDITION"	=>	"#^/news/([0-9]+)/.*#",
-		"RULE"	=>	"ELEMENT_ID=$1",
-		"ID"	=>	"",
-		"PATH"	=>	"/news/detail.php",
-	),
-	array(
-		"CONDITION"	=>	"#^/content/gallery/#",
-		"RULE"	=>	"",
-		"ID"	=>	"bitrix:photogallery_user",
-		"PATH"	=>	"/content/gallery/index.php",
-	),
-	array(
-		"CONDITION"	=>	"#^/e-store/books/#",
-		"RULE"	=>	"",
-		"ID"	=>	"bitrix:catalog",
-		"PATH"	=>	"/e-store/books/index.php",
-	),
-	array(
-		"CONDITION"	=>	"#^/content/photo/#",
-		"RULE"	=>	"",
-		"ID"	=>	"bitrix:photogallery",
-		"PATH"	=>	"/content/photo/index.php",
-	),
-	array(
-		"CONDITION"	=>	"#^/more/personal/#",
-		"RULE"	=>	"",
-		"ID"	=>	"jb:blog",
-		"PATH"	=>	"/more/personal/index.php",
-	),
-	array(
-		"CONDITION"	=>	"#^/content/news/#",
-		"RULE"	=>	"",
-		"ID"	=>	"bitrix:news",
-		"PATH"	=>	"/content/news/index.php",
-	),
-	array(
-		"CONDITION"	=>	"#^/content/faq/#",
-		"RULE"	=>	"",
-		"ID"	=>	"bitrix:support.faq",
-		"PATH"	=>	"/content/faq/index.php",
-	),
-	array(
-		"CONDITION"	=>	"#^/#",
-		"RULE"	=>	"",
-		"ID"	=>	"znp:news",
-		"PATH"	=>	"/index.php",
-	),
+		"PATH"	=>	"/lk/profile/index.php",
+	)
 );
 
 ?>

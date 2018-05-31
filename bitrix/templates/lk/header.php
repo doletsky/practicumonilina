@@ -1,4 +1,4 @@
-<?if($APPLICATION->GetCurDir()=='/lk/' && !$USER->IsAuthorized()) LocalRedirect('/');?>
+<?if(substr_count($APPLICATION->GetCurDir(),'/lk/') && !$USER->IsAuthorized()) LocalRedirect('/');?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 
@@ -52,22 +52,37 @@ if ($USER->IsAdmin() && $_GET["panel"]==1)$APPLICATION->ShowPanel();
         </div>
         <div class="row lk-students-body">
             <div class="col-md-2">
-                <h5>Список уроков</h5>
-                <div class="col-md-12">
-                    <a href="#">
-                        Урок 1. Введение.
-                    </a>
-                </div>
-                <div class="col-md-12">
-                    <a href="#">
-                        Урок 2. Тема.
-                    </a>
-                </div>
-                <div class="col-md-12">
-                    <a href="#">
-                        Урок 3. Тема.
-                    </a>
-                </div>
+                <?$APPLICATION->IncludeComponent(
+                    "bitrix:menu",
+                    "vertical",
+                    Array(
+                        "ROOT_MENU_TYPE" => "left",
+                        "MAX_LEVEL" => "1",
+                        "USE_EXT" => "N",
+                        "DELAY" => "Y",
+                        "ALLOW_MULTI_SELECT" => "Y",
+                        "MENU_CACHE_TYPE" => "N",
+                        "MENU_CACHE_TIME" => "3600",
+                        "MENU_CACHE_USE_GROUPS" => "Y",
+                        "MENU_CACHE_GET_VARS" => array()
+                    )
+                );?>
+<!--                <h5>Список уроков</h5>-->
+<!--                <div class="col-md-12">-->
+<!--                    <a href="#">-->
+<!--                        Урок 1. Введение.-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--                <div class="col-md-12">-->
+<!--                    <a href="#">-->
+<!--                        Урок 2. Тема.-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--                <div class="col-md-12">-->
+<!--                    <a href="#">-->
+<!--                        Урок 3. Тема.-->
+<!--                    </a>-->
+<!--                </div>-->
 
             </div>
 
