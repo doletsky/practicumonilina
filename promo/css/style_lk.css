@@ -74,3 +74,6 @@ body {
 .reviews-reply-form {
     position: absolute;
 }
+.main-menu li a{
+    line-height: 60px !important;
+}

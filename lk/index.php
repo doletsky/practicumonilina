@@ -1,20 +1,14 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Title");
+if(strlen($APPLICATION->GetTitle())<=0)$APPLICATION->SetTitle(" урсы");
 ?> 
 <div class="col-lg-6"> 
-
-  <h4><span class="colored"><?$APPLICATION->ShowTitle()?></span></h4>
- Ёто рабочее пол€ зан€ти€.
-  <br />
- «десь будет весь рабочий материал: видео, текст, тесты и поле выполнени€ д/з.
-
 <?if(isset($_REQUEST["id"]))$APPLICATION->IncludeComponent(
 	"bitrix:news.detail",
 	"",
 	Array(
 		"DISPLAY_DATE" => "Y",
-		"DISPLAY_NAME" => "N",
+		"DISPLAY_NAME" => "Y",
 		"DISPLAY_PICTURE" => "N",
 		"DISPLAY_PREVIEW_TEXT" => "Y",
 		"USE_SHARE" => "N",
@@ -30,7 +24,7 @@ $APPLICATION->SetTitle("Title");
 		"META_KEYWORDS" => "-",
 		"META_DESCRIPTION" => "-",
 		"BROWSER_TITLE" => "-",
-		"SET_TITLE" => "Y",
+		"SET_TITLE" => "N",
 		"SET_STATUS_404" => "N",
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
 		"ADD_SECTIONS_CHAIN" => "Y",

@@ -49,6 +49,7 @@ if(!isset($_REQUEST["course"])){
         }
 
     }
+    $APPLICATION->SetTitle($ar_fields["NAME"]);
 }
 
 ?>

@@ -49,6 +49,7 @@ if ($USER->IsAdmin() && $_GET["panel"]==1)$APPLICATION->ShowPanel();
                         "MENU_CACHE_GET_VARS" => array()
                     )
                 );?>
+                <h4><span class="colored"><?$APPLICATION->ShowTitle()?></span></h4>
             </div>
         </div>
         <div class="row lk-students-body">

@@ -1,7 +1,11 @@
 <?if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 
 <?if (!empty($arResult)):?>
-    <h5>Section title</h5>
+    <h5>
+        <?if(isset($_REQUEST["course"])):?>Список занятий:
+        <?else:?>Список курсов:
+        <?endif;?>
+    </h5>
 <?
 foreach($arResult as $arItem):
 ?>

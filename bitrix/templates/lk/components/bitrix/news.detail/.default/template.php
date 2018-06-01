@@ -1,4 +1,7 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
+<?if($arParams["DISPLAY_NAME"]!="N" && $arResult["NAME"]):?>
+    <h3><span class="colored">Занятие <?=$arResult["NAME"]?></span></h3>
+<?endif;?>
 <div id="jp_container_1" class="jp-video " role="application" aria-label="media player">
     <div class="jp-type-single">
         <div id="jquery_jplayer_1" class="jp-jplayer"></div>
@@ -11,9 +14,6 @@
 	<?endif?>
 	<?if($arParams["DISPLAY_DATE"]!="N" && $arResult["DISPLAY_ACTIVE_FROM"]):?>
 		<span class="news-date-time"><?=$arResult["DISPLAY_ACTIVE_FROM"]?></span>
-	<?endif;?>
-	<?if($arParams["DISPLAY_NAME"]!="N" && $arResult["NAME"]):?>
-		<h3><?=$arResult["NAME"]?></h3>
 	<?endif;?>
 	<?if($arParams["DISPLAY_PREVIEW_TEXT"]!="N" && $arResult["FIELDS"]["PREVIEW_TEXT"]):?>
 		<p><?=$arResult["FIELDS"]["PREVIEW_TEXT"];unset($arResult["FIELDS"]["PREVIEW_TEXT"]);?></p>
