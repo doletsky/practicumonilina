@@ -2,8 +2,9 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 if(strlen($APPLICATION->GetTitle())<=0)$APPLICATION->SetTitle("Курсы");
 ?> 
-<div class="col-lg-6"> 
-<?if(isset($_REQUEST["id"]))$APPLICATION->IncludeComponent(
+<div class="col-lg-6" style="height: 95%;">
+    <div class="scroll-work-area" style="height: 100%"><div>
+<?if(isset($_REQUEST["id"])):$APPLICATION->IncludeComponent(
 	"bitrix:news.detail",
 	"",
 	Array(
@@ -43,5 +44,19 @@ if(strlen($APPLICATION->GetTitle())<=0)$APPLICATION->SetTitle("Курсы");
 		"AJAX_OPTION_HISTORY" => "N"
 	),
 false
-);?></div>
+);?>
+<?elseif(isset($_REQUEST["course"])):
+    $arFilter = Array(
+        "IBLOCK_ID"=>COURSE_IBLOCK_ID,
+        "ACTIVE"=>"Y",
+        "CODE"=>$_REQUEST["course"]
+    );
+    $res = CIBlockSection::GetList(Array("SORT"=>"ASC"), $arFilter);
+    $ar_fields = $res->GetNext();
+    echo $ar_fields["DESCRIPTION"];
+    ?>
+
+<?endif;?>
+        </div></div>
+</div>
  <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

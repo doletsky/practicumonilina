@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    $('.scroll-work-area').jScrollPane();
     var el=$('.lk-students-chat .chat').jScrollPane();
     var api = el.data('jsp');
     api.scrollToBottom('fast');
