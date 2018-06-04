@@ -2,24 +2,31 @@
 $aMenuLinks = Array(
 	Array(
 		"Курсы", 
-		"", 
+		"/lk/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Профиль", 
-		"profile/", 
+		"/lk/profile/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Оплата", 
-		"pay/", 
+		"/lk/pay/", 
 		Array(), 
 		Array(), 
 		"" 
+	),
+	Array(
+		"выйти", 
+		"?logout=yes", 
+		Array(), 
+		Array(), 
+		"CSite::InGroup(array(1,3,7,4,8,19,20,21,22))" 
 	)
 );
 ?>
