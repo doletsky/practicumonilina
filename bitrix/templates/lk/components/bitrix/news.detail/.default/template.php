@@ -2,6 +2,7 @@
 <?if($arParams["DISPLAY_NAME"]!="N" && $arResult["NAME"]):?>
     <h3><span class="colored">Занятие <?=$arResult["NAME"]?></span></h3>
 <?endif;?>
+<?if($arResult['PREMISSION']==1):?>
 <div id="jp_container_1" class="jp-video " role="application" aria-label="media player">
     <div class="jp-type-single">
         <div id="jquery_jplayer_1" class="jp-jplayer"></div>
@@ -82,3 +83,6 @@
 	}
 	?>
 </div>
+<?else:?>
+Доступ запрещен, обратитесь к администратору.
+<?endif?>
