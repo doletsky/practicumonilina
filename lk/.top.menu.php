@@ -22,6 +22,13 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
+		"Помощь", 
+		"/lk/help.php", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
 		"выйти", 
 		"?logout=yes", 
 		Array(), 
