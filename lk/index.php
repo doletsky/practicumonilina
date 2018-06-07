@@ -4,7 +4,9 @@ if(strlen($APPLICATION->GetTitle())<=0)$APPLICATION->SetTitle("Êóðñû");
 ?> 
 <div class="col-lg-6" style="height: 95%;"> 
   <div class="scroll-work-area" style="height: 100%;">
-    <div> <?if(isset($_REQUEST["id"])):$APPLICATION->IncludeComponent(
+    <div>
+        <?if(isset($_REQUEST["id"])):
+            $APPLICATION->IncludeComponent(
 	"bitrix:news.detail",
 	"",
 	Array(
@@ -44,7 +46,43 @@ if(strlen($APPLICATION->GetTitle())<=0)$APPLICATION->SetTitle("Êóðñû");
 		"AJAX_OPTION_HISTORY" => "N"
 	),
 false
-);?> <?elseif(isset($_REQUEST["course"])):
+);?>
+            <?$APPLICATION->IncludeComponent(
+            "bitrix:form.result.list.my",
+            "",
+            Array(
+                "FORMS" => array("4"),
+                "NUM_RESULTS" => "10",
+                "LIST_URL" => "my_result_list.php?WEB_FORM_ID=#FORM_ID#",
+                "VIEW_URL" => "my_result_view.php?WEB_FORM_ID=#FORM_ID#&RESULT_ID=#RESULT_ID#",
+                "EDIT_URL" => "my_result_edit.php?WEB_FORM_ID=#FORM_ID#&RESULT_ID=#RESULT_ID#"
+            ),
+            false
+        );?> 
+            <?$APPLICATION->IncludeComponent(
+            "bitrix:form.result.new",
+            "",
+            Array(
+                "SEF_MODE" => "N",
+                "WEB_FORM_ID" => "4",
+                "LIST_URL" => "result_list.php",
+                "EDIT_URL" => "result_edit.php",
+                "SUCCESS_URL" => "",
+                "CHAIN_ITEM_TEXT" => "",
+                "CHAIN_ITEM_LINK" => "",
+                "IGNORE_CUSTOM_TEMPLATE" => "N",
+                "USE_EXTENDED_ERRORS" => "N",
+                "CACHE_TYPE" => "A",
+                "CACHE_TIME" => "3600",
+                "CACHE_NOTES" => "",
+                "VARIABLE_ALIASES" => Array(
+                    "WEB_FORM_ID" => "WEB_FORM_ID",
+                    "RESULT_ID" => "RESULT_ID"
+                )
+            ),
+            false
+        );?>
+        <?elseif(isset($_REQUEST["course"])):
     $arFilter = Array(
         "IBLOCK_ID"=>COURSE_IBLOCK_ID,
         "ACTIVE"=>"Y",
@@ -53,40 +91,9 @@ false
     $res = CIBlockSection::GetList(Array("SORT"=>"ASC"), $arFilter);
     $ar_fields = $res->GetNext();
     echo $ar_fields["DESCRIPTION"];
-    ?> <?endif;?> <?$APPLICATION->IncludeComponent(
-	"bitrix:form.result.list.my",
-	"",
-	Array(
-		"FORMS" => array("4"),
-		"NUM_RESULTS" => "10",
-		"LIST_URL" => "my_result_list.php?WEB_FORM_ID=#FORM_ID#",
-		"VIEW_URL" => "my_result_view.php?WEB_FORM_ID=#FORM_ID#&RESULT_ID=#RESULT_ID#",
-		"EDIT_URL" => "my_result_edit.php?WEB_FORM_ID=#FORM_ID#&RESULT_ID=#RESULT_ID#"
-	),
-false
-);?> <?$APPLICATION->IncludeComponent(
-	"bitrix:form.result.new",
-	"",
-	Array(
-		"SEF_MODE" => "N",
-		"WEB_FORM_ID" => "4",
-		"LIST_URL" => "result_list.php",
-		"EDIT_URL" => "result_edit.php",
-		"SUCCESS_URL" => "",
-		"CHAIN_ITEM_TEXT" => "",
-		"CHAIN_ITEM_LINK" => "",
-		"IGNORE_CUSTOM_TEMPLATE" => "N",
-		"USE_EXTENDED_ERRORS" => "N",
-		"CACHE_TYPE" => "A",
-		"CACHE_TIME" => "3600",
-		"CACHE_NOTES" => "",
-		"VARIABLE_ALIASES" => Array(
-			"WEB_FORM_ID" => "WEB_FORM_ID",
-			"RESULT_ID" => "RESULT_ID"
-		)
-	),
-false
-);?></div>
+    ?>
+        <?endif;?> 
+</div>
   </div>
  </div>
  <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
