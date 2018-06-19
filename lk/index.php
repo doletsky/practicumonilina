@@ -72,9 +72,10 @@ false
                 "CHAIN_ITEM_LINK" => "",
                 "IGNORE_CUSTOM_TEMPLATE" => "N",
                 "USE_EXTENDED_ERRORS" => "N",
-                "CACHE_TYPE" => "A",
+                "CACHE_TYPE" => "N",
                 "CACHE_TIME" => "3600",
                 "CACHE_NOTES" => "",
+                "SHOW_ADDITIONAL" => "Y",
                 "VARIABLE_ALIASES" => Array(
                     "WEB_FORM_ID" => "WEB_FORM_ID",
                     "RESULT_ID" => "RESULT_ID"

@@ -48,7 +48,7 @@ if ($arResult["isFormTitle"])
 /***********************************************************************************
 						form questions
 ***********************************************************************************/
-?>1223
+?><pre><?print_r($arResult)?></pre>
 <table class="form-table data-table">
 	<thead>
 		<tr>
@@ -73,24 +73,6 @@ if ($arResult["isFormTitle"])
 	<? 
 	} //endwhile 
 	?>
-<?
-if($arResult["isUseCaptcha"] == "Y")
-{
-?>
-		<tr>
-			<th colspan="2"><b><?=GetMessage("FORM_CAPTCHA_TABLE_TITLE")?></b></th>
-		</tr>
-		<tr> 
-			<td>&nbsp;</td>
-			<td><input type="hidden" name="captcha_sid" value="<?=htmlspecialchars($arResult["CAPTCHACode"]);?>" /><img src="/bitrix/tools/captcha.php?captcha_sid=<?=htmlspecialchars($arResult["CAPTCHACode"]);?>" width="180" height="40" /></td>
-		</tr>
-		<tr> 
-			<td><?=GetMessage("FORM_CAPTCHA_FIELD_TITLE")?><?=$arResult["REQUIRED_SIGN"];?></td>
-			<td><input type="text" name="captcha_word" size="30" maxlength="50" value="" class="inputtext" /></td>
-		</tr>
-<?
-} // isUseCaptcha
-?>
 	</tbody>
 	<tfoot>
 		<tr>
