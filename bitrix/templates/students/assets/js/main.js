@@ -163,7 +163,102 @@
 
 				});
 
-		// Scroll lock.
+        //Sidebar-chat
+            var $sidebar2 = $('#sidebar-chat'),
+                $sidebar2_inner = $sidebar2.children('.inner');
+
+            // Inactive by default on <= large.
+            breakpoints.on('<=large', function() {
+                $sidebar2.addClass('inactive');
+            });
+
+            breakpoints.on('>large', function() {
+                $sidebar2.removeClass('inactive');
+            });
+
+            // Hack: Workaround for Chrome/Android scrollbar position bug.
+            if (browser.os == 'android'
+                &&	browser.name == 'chrome')
+                $('<style>#sidebar .inner::-webkit-scrollbar { display: none; }</style>')
+                    .appendTo($head);
+
+            // Toggle.
+            $('<a href="#sidebar-chat" class="toggle">Toggle</a>')
+                .prependTo($sidebar2)
+                .on('click', function(event) {
+
+                    // Prevent default.
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    // Toggle.
+                    $sidebar2.toggleClass('inactive');
+
+                });
+
+            // Events.
+
+            // Link clicks.
+            $sidebar2.on('click', 'a', function(event) {
+
+                // >large? Bail.
+                if (breakpoints.active('>large'))
+                    return;
+
+                // Vars.
+                var $a = $(this),
+                    href = $a.attr('href'),
+                    target = $a.attr('target');
+
+                // Prevent default.
+                event.preventDefault();
+                event.stopPropagation();
+
+                // Check URL.
+                if (!href || href == '#' || href == '')
+                    return;
+
+                // Hide sidebar.
+                $sidebar2.addClass('inactive');
+
+                // Redirect to href.
+                setTimeout(function() {
+
+                    if (target == '_blank')
+                        window.open(href);
+                    else
+                        window.location.href = href;
+
+                }, 500);
+
+            });
+
+            // Prevent certain events inside the panel from bubbling.
+            $sidebar2.on('click touchend touchstart touchmove', function(event) {
+
+                // >large? Bail.
+                if (breakpoints.active('>large'))
+                    return;
+
+                // Prevent propagation.
+                event.stopPropagation();
+
+            });
+
+            // Hide panel on body click/tap.
+            $body.on('click touchend', function(event) {
+
+                // >large? Bail.
+                if (breakpoints.active('>large'))
+                    return;
+
+                // Deactivate.
+                $sidebar2.addClass('inactive');
+
+            });
+
+
+    // Scroll lock.
 		// Note: If you do anything to change the height of the sidebar's content, be sure to
 		// trigger 'resize.sidebar-lock' on $window so stuff doesn't get out of sync.
 
