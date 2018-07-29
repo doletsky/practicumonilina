@@ -3299,10 +3299,10 @@ input, select, textarea {
     -webkit-flex-shrink: 0;
     -ms-flex-shrink: 0;
     flex-shrink: 0;
-    -moz-transition: margin-left 0.5s ease, box-shadow 0.5s ease;
-    -webkit-transition: margin-left 0.5s ease, box-shadow 0.5s ease;
-    -ms-transition: margin-left 0.5s ease, box-shadow 0.5s ease;
-    transition: margin-left 0.5s ease, box-shadow 0.5s ease;
+    -moz-transition: width 0.5s ease, box-shadow 0.5s ease;
+    -webkit-transition: width 0.5s ease, box-shadow 0.5s ease;
+    -ms-transition: width 0.5s ease, box-shadow 0.5s ease;
+    transition: width 0.5s ease, box-shadow 0.5s ease;
     background-color: #f5f6f7;
     font-size: 0.9em;
     position: relative;
@@ -3386,9 +3386,9 @@ input, select, textarea {
     width: inherit;
 }
 
-#sidebar-chat.inactive {
-    margin-left: -26em;
-}
+/*#sidebar-chat.inactive {*/
+    /*margin-left: -26em;*/
+/*}*/
 
 @media screen and (max-width: 1680px) {
 
@@ -3420,8 +3420,7 @@ input, select, textarea {
     }
 
     #sidebar-chat.inactive {
-        margin-left: 24em;
-        /*position: fixed;*/
+        width: 0;
     }
 
 }
