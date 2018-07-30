@@ -3309,6 +3309,10 @@ input, select, textarea {
     width: 26em;
 }
 
+#sidebar-chat.inactive {
+    width: 0;
+}
+
 #sidebar-chat h2 {
     font-size: 1.3888888889em;
 }
@@ -3345,15 +3349,15 @@ input, select, textarea {
 
 #sidebar-chat .toggle {
     text-decoration: none;
-    -moz-transition: left 0.5s ease;
-    -webkit-transition: left 0.5s ease;
-    -ms-transition: left 0.5s ease;
-    transition: left 0.5s ease;
+    -moz-transition: right 0.5s ease;
+    -webkit-transition: right 0.5s ease;
+    -ms-transition: right 0.5s ease;
+    transition: right 0.5s ease;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     border: 0;
     display: block;
     height: 7.5em;
-    left: 26em;
+    right: 26em;
     line-height: 7.5em;
     outline: 0;
     overflow: hidden;
@@ -3363,6 +3367,10 @@ input, select, textarea {
     top: 0;
     width: 6em;
     z-index: 10000;
+}
+
+#sidebar-chat.inactive .toggle{
+    right: 0;
 }
 
 #sidebar-chat .toggle:before {
