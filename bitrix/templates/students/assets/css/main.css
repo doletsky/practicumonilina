@@ -3375,7 +3375,7 @@ input, select, textarea {
 }
 
 #sidebar-chat .toggle:before {
-    content: '\f0c9';
+    content: '\f0e6';
     font-size: 2rem;
     height: inherit;
     left: 0;
@@ -3430,7 +3430,7 @@ input, select, textarea {
     #sidebar-chat {
         box-shadow: 0 0 5em 0 rgba(0, 0, 0, 0.175);
         height: 100%;
-        left: 0;
+        right: 0;
         position: fixed;
         top: 0;
         z-index: 10000;
@@ -3478,6 +3478,9 @@ input, select, textarea {
     #sidebar-chat .toggle {
         text-indent: 7.25em;
         width: 7.25em;
+        left: -7em;
+        top: 100%;
+        margin-top: -5em;
     }
 
     #sidebar-chat .toggle:before {
