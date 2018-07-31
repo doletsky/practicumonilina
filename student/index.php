@@ -125,7 +125,8 @@ if(strlen($APPLICATION->GetTitle())<=0)$APPLICATION->SetTitle("Курсы");
             </article>
         </div>
     </section>
-<?if(0):?>
+
+
 <div class="col-lg-6" style="height: 95%;"> 
   <div class="scroll-work-area" style="height: 100%;">
     <div>
@@ -208,6 +209,7 @@ false
             false
         );?>
         <?elseif(isset($_REQUEST["course"])):
+            CModule::IncludeModule('iblock');
     $arFilter = Array(
         "IBLOCK_ID"=>COURSE_IBLOCK_ID,
         "ACTIVE"=>"Y",
@@ -221,5 +223,5 @@ false
 </div>
   </div>
  </div>
-<?endif?>
+
  <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
