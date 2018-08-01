@@ -37,7 +37,7 @@ endif;
         </form>
     </div>
 </div>
-<div class="chat-message-submit" onclick="$('#REPLIER').submit();">></div>
+<div class="chat-message-submit" onclick="$('#REPLIER').submit();"></div>
  <?
 if(0){
 CUtil::InitJSCore(array('ajax', 'fx'));

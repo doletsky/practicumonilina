@@ -38,6 +38,10 @@
 <script src="<?=SITE_TEMPLATE_PATH?>/assets/js/breakpoints.min.js"></script>
 <script src="<?=SITE_TEMPLATE_PATH?>/assets/js/util.js"></script>
 <script src="<?=SITE_TEMPLATE_PATH?>/assets/js/main.js"></script>
+<script type="text/javascript" src="/promo/js/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="/promo/js/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="/promo/js/jquery.jscrollpane.min.js"></script>
+<script type="text/javascript" src="<?=SITE_TEMPLATE_PATH?>/assets/js/lk.js"></script>
 
 </body>
 </html>

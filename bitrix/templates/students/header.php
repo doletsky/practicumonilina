@@ -10,6 +10,7 @@
     <meta charset="windows-1251" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/assets/css/main.css" />
+    <link href="<?=SITE_TEMPLATE_PATH?>/assets/css/style_lk.css" rel="stylesheet" type="text/css" />
 </head>
 <body class="is-preload">
 
@@ -18,85 +19,36 @@
 
 <!-- Sidebar -->
 <div id="sidebar-chat">
-    <div class="inner">
+    <div class="inner lk-students-chat">
 
-        <!-- Menu -->
-        <nav id="menu">
-            <header class="major">
-                <h2>Menu</h2>
-            </header>
-            <ul>
-                <li><a href="index.html">Homepage</a></li>
-                <li><a href="generic.html">Generic</a></li>
-                <li><a href="elements.html">Elements</a></li>
-                <li>
-                    <span class="opener">Submenu</span>
-                    <ul>
-                        <li><a href="#">Lorem Dolor</a></li>
-                        <li><a href="#">Ipsum Adipiscing</a></li>
-                        <li><a href="#">Tempus Magna</a></li>
-                        <li><a href="#">Feugiat Veroeros</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Etiam Dolore</a></li>
-                <li><a href="#">Adipiscing</a></li>
-                <li>
-                    <span class="opener">Another Submenu</span>
-                    <ul>
-                        <li><a href="#">Lorem Dolor</a></li>
-                        <li><a href="#">Ipsum Adipiscing</a></li>
-                        <li><a href="#">Tempus Magna</a></li>
-                        <li><a href="#">Feugiat Veroeros</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Maximus Erat</a></li>
-                <li><a href="#">Sapien Mauris</a></li>
-                <li><a href="#">Amet Lacinia</a></li>
-            </ul>
-        </nav>
-
-        <!-- Section -->
-        <section>
-            <header class="major">
-                <h2>Ante interdum</h2>
-            </header>
-            <div class="mini-posts">
-                <article>
-                    <a href="#" class="image"><img src="<?=SITE_TEMPLATE_PATH?>/images/pic07.jpg" alt="" /></a>
-                    <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
-                </article>
-                <article>
-                    <a href="#" class="image"><img src="<?=SITE_TEMPLATE_PATH?>/images/pic08.jpg" alt="" /></a>
-                    <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
-                </article>
-                <article>
-                    <a href="#" class="image"><img src="<?=SITE_TEMPLATE_PATH?>/images/pic09.jpg" alt="" /></a>
-                    <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
-                </article>
-            </div>
-            <ul class="actions">
-                <li><a href="#" class="button">More</a></li>
-            </ul>
-        </section>
-
-        <!-- Section -->
-        <section>
-            <header class="major">
-                <h2>Get in touch</h2>
-            </header>
-            <p>Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-            <ul class="contact">
-                <li class="fa-envelope-o"><a href="#">information@untitled.tld</a></li>
-                <li class="fa-phone">(000) 000-0000</li>
-                <li class="fa-home">1234 Somewhere Road #8254<br />
-                    Nashville, TN 00000-0000</li>
-            </ul>
-        </section>
-
-        <!-- Footer -->
-        <footer id="footer">
-            <p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
-        </footer>
+        <? $APPLICATION->IncludeComponent("bitrix:forum.topic.reviews", "chat", Array(
+                "SHOW_LINK_TO_FORUM" => "N",
+                "FILES_COUNT" => "2",
+                "FORUM_ID" => "8",
+                "IBLOCK_TYPE" => "supports",
+                "IBLOCK_ID" => MAIN_IBLOCK_ID,
+                "ELEMENT_ID" => COption::GetOptionInt("iblock", "main_eid_for_uid_" . $USER->GetID()),
+                "AJAX_POST" => "N",
+                "POST_FIRST_MESSAGE" => "Y",
+                "POST_FIRST_MESSAGE_TEMPLATE" => "#IMAGE#[url=#LINK#]#TITLE#[/url]#BODY#",
+                "URL_TEMPLATES_READ" => "read.php?FID=#FID#&TID=#TID#",
+                "URL_TEMPLATES_DETAIL" => "photo_detail.php?ID=#ELEMENT_ID#",
+                "URL_TEMPLATES_PROFILE_VIEW" => "profile_view.php?UID=#UID#",
+                "MESSAGES_PER_PAGE" => "1000000",
+                "PAGE_NAVIGATION_TEMPLATE" => "",
+                "DATE_TIME_FORMAT" => "d.m.Y H:i:s",
+                "PATH_TO_SMILE" => "/bitrix/images/forum/smile/",
+                "EDITOR_CODE_DEFAULT" => "Y",
+                "SHOW_AVATAR" => "Y",
+                "SHOW_RATING" => "Y",
+                "RATING_TYPE" => "like",
+                "SHOW_MINIMIZED" => "N",
+                "USE_CAPTCHA" => "Y",
+                "PREORDER" => "Y",
+                "CACHE_TYPE" => "N",
+                "CACHE_TIME" => "0"
+            )
+        ); ?>
 
     </div>
 </div>
