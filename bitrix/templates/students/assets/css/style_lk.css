@@ -84,3 +84,13 @@
 .col-md-12 {
     width: 100%;
 }
+@media screen and (max-width: 736px){
+    #sidebar-chat {
+        width: 80%;
+    }
+    #sidebar-chat > .inner {
+        padding: 1.6666666667em 1.6666666667em 1.3333333333em 1.6666666667em;
+        width: 100%;
+        font-size: 160%;
+    }
+}
