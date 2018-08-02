@@ -170,16 +170,18 @@
             // Inactive by default on <= large.
             breakpoints.on('<=large', function() {
                 $sidebar2.addClass('inactive');
+
             });
 
             breakpoints.on('>large', function() {
                 $sidebar2.removeClass('inactive');
+
             });
 
             // Hack: Workaround for Chrome/Android scrollbar position bug.
             if (browser.os == 'android'
                 &&	browser.name == 'chrome')
-                $('<style>#sidebar .inner::-webkit-scrollbar { display: none; }</style>')
+                $('<style>#sidebar-chat .inner::-webkit-scrollbar { display: none; }</style>')
                     .appendTo($head);
 
             // Toggle.
@@ -193,7 +195,8 @@
 
                     // Toggle.
                     $sidebar2.toggleClass('inactive');
-
+                    //
+                    if(!$sidebar2.hasClass('inactive')) $('.lk-students-chat').scrollTop($('.lk-students-chat').scrollTop() + $('.chat').height());
                 });
 
             // Events.
