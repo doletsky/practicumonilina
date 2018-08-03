@@ -13,7 +13,7 @@ if(!isset($_REQUEST["course"])){
     while ($ar_fields = $res->GetNext()){
         $aMenuLinks[]=Array(
             $ar_fields["NAME"],
-            "/lk/course/".$ar_fields["CODE"]."/",
+            "/student/course/".$ar_fields["CODE"]."/",
             Array(),
             Array(),
             ""
@@ -39,7 +39,7 @@ if(!isset($_REQUEST["course"])){
         if($arEfields["IBLOCK_ID"]==COURSE_IBLOCK_ID){
             $aMenuLinks[]=Array(
                 $arEfields["NAME"],
-                "/lk/course/".$_REQUEST["course"]."/".$arEfields["ID"]."/",
+                "/student/course/".$_REQUEST["course"]."/".$arEfields["ID"]."/",
                 Array(),
                 Array(),
                 "",

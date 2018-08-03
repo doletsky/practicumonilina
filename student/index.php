@@ -1,10 +1,11 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 if(strlen($APPLICATION->GetTitle())<=0)$APPLICATION->SetTitle("Курсы");
-?><?print_r($_REQUEST)?>
+?>
     <!-- Header -->
     <header id="header">
-        <a href="index.html" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
+        <a href="#" class="logo"><?=$APPLICATION->ShowTitle()?></a>
+        <?/*?>
         <ul class="icons">
             <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
             <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
@@ -12,6 +13,7 @@ if(strlen($APPLICATION->GetTitle())<=0)$APPLICATION->SetTitle("Курсы");
             <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
             <li><a href="#" class="icon fa-medium"><span class="label">Medium</span></a></li>
         </ul>
+        <?*/?>
     </header>
 
     <!-- Banner -->

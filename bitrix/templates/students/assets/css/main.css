@@ -3417,7 +3417,7 @@ input, select, textarea {
 
     #sidebar-chat .toggle {
         height: 6.25em;
-        left: -5em;
+        right: 24em;
         line-height: 6.25em;
         text-indent: 5em;
         width: 5em;

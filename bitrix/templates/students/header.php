@@ -6,7 +6,7 @@
 -->
 <html>
 <head>
-    <title>Editorial by HTML5 UP</title>
+    <title><?=$APPLICATION->ShowTitle()?></title>
     <meta charset="windows-1251" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/assets/css/main.css" />
